@@ -1,0 +1,60 @@
+.footer {
+  margin: 20px auto 20px;
+  @media (min-width: 768px) {
+    margin: 80px auto 20px;
+  }
+  &__container {
+    @media (min-width: 576px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+  }
+  &__logo {
+    display: flex;
+    flex-direction: column;
+
+    small {
+      margin-top: 4px;
+      max-width: 260px;
+      font-size: 14px;
+    }
+  }
+  &__links {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @media (min-width: 576px) {
+      margin-top: 20px;
+      flex-direction: row;
+      gap: 40px;
+    }
+  }
+  &__list {
+    text-transform: uppercase;
+
+    @media (min-width: 576px) {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    li h4 {
+      @media (min-width: 576px) {
+        margin-bottom: 4px;
+      }
+    }
+  }
+  &__item {
+    a {
+      font-family: $secondary-font;
+      font-size: 12px;
+      font-weight: 300;
+    }
+  }
+}
