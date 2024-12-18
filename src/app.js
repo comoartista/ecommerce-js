@@ -1,9 +1,12 @@
 import "./scss/style.scss";
 import "@fortawesome/fontawesome-free/css/all.css";
 
-const global = {
-  currentPage: window.location.pathname,
-};
+import { global } from "./js/global";
+import { btnWideBaner } from "./js/modules/banner";
+import { toggleMenuBurger } from "./js/modules/menu";
+import { playVideo } from "./js/modules/video";
+import { handleScreenResize } from "./js/modules/products";
+import { productDetails } from "./js/modules/productDetails";
 
 function highlightActiveLink() {
   const menuLinks = document.querySelectorAll(".menu__item");
@@ -12,12 +15,13 @@ function highlightActiveLink() {
       item.classList.add("active");
   });
 }
-//Init App
+
 function init() {
   switch (global.currentPage) {
     case "/":
     case "index.html":
-      console.log("/");
+      playVideo();
+      handleScreenResize(global);
       break;
     case "/shop.html":
       console.log("/shop.html");
@@ -31,8 +35,14 @@ function init() {
     case "/brew-guides.html":
       console.log("/brew-guides.html");
       break;
+    case "/product.html":
+      productDetails();
+      console.log("/product.html");
+      break;
   }
+  btnWideBaner();
   highlightActiveLink();
+  toggleMenuBurger();
 }
 
 document.addEventListener("DOMContentLoaded", init);

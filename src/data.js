@@ -2,6 +2,7 @@ const coffeeData = [
   {
     id: 1,
     name: "Espresso El Balar",
+    slug: "espresso-el-balar",
     origin: "Costa Rica",
     recommendedFor: ["Filter Methods"],
     aroma: ["Tropical Fruit", "Green Apple", "Cherry Sugus", "Melon"],

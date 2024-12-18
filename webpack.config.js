@@ -13,7 +13,7 @@ module.exports = {
     assetModuleFilename: "images/[name][ext]",
   },
   cache: {
-    type: "filesystem", // Cambiado a 'filesystem'
+    type: "filesystem",
   },
   devServer: {
     static: {
@@ -64,6 +64,10 @@ module.exports = {
       title: "Webpack App",
       filename: "index.html",
       template: "./src/index.html",
+    }),
+    new HtmlWebpackPlugin({
+      filename: "product.html",
+      template: "./src/product.html",
     }),
     new HtmlWebpackPlugin({
       filename: "shop.html",
