@@ -1,48 +1,28 @@
+import * as bootstrap from "bootstrap"; // Імпортує всі компоненти Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "./scss/style.scss";
-import "@fortawesome/fontawesome-free/css/all.css";
 
-import { global } from "./js/global";
-import { btnWideBaner } from "./js/modules/banner";
-import { toggleMenuBurger } from "./js/modules/menu";
-import { playVideo } from "./js/modules/video";
-import { handleScreenResize } from "./js/modules/products";
-import { productDetails } from "./js/modules/productDetails";
+import { displayProducts } from "./js/modules/productList.js";
+import { displayProductDetails } from "./js/modules/productDetails.js";
+import { displayCart } from "./js/modules/displayCart.js";
+import { global } from "./js/global.js";
+import { menuAnimation } from "./js/animation.js";
 
-function highlightActiveLink() {
-  const menuLinks = document.querySelectorAll(".menu__item");
-  menuLinks.forEach((item) => {
-    global.currentPage === item.querySelector("a").getAttribute("href") &&
-      item.classList.add("active");
-  });
-}
-
-function init() {
+export function init() {
   switch (global.currentPage) {
     case "/":
     case "index.html":
-      playVideo();
-      handleScreenResize(global);
+      displayProducts();
+      menuAnimation();
       break;
-    case "/shop.html":
-      console.log("/shop.html");
+    case "/product-details.html":
+      displayProductDetails();
       break;
-    case "/merch.html":
-      console.log("/merch.html");
-      break;
-    case "/subscribe.html":
-      console.log("/subscribe.html");
-      break;
-    case "/brew-guides.html":
-      console.log("/brew-guides.html");
-      break;
-    case "/product.html":
-      productDetails();
-      console.log("/product.html");
+    case "/cart.html":
+      displayCart();
       break;
   }
-  btnWideBaner();
-  highlightActiveLink();
-  toggleMenuBurger();
 }
 
-document.addEventListener("DOMContentLoaded", init);
+window.addEventListener("DOMContentLoaded", init);

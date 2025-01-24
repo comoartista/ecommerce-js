@@ -1,4 +1,4 @@
+// global.js
 export const global = {
-  currentPage: window.location.pathname,
-  coffeeData: require("../data.js"),
+  currentPage: window.location.pathname
 };

@@ -1,0 +1,179 @@
+[
+  {
+    "id": 1,
+    "name": "Lali",
+    "slug": "sillon-con-reposabrazos-en-ratan-lali",
+    "category": "Sillones",
+    "description": "Sillón con reposabrazos en madera de fresno y ratán Lali",
+    "color": "Blanco",
+    "price": "179.95",
+    "imageUrl": "/images/lali.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 2,
+    "name": "Quëbi",
+    "slug": "mesa-de-comedor-extensible-en-madera-170x95-cm-quebi",
+    "category": "Mesas",
+    "description": "Mesa de Comedor Extensible Rectangular en Madera (170-260x95 cm) Quëbi",
+    "color": "Blanco",
+
+    "price": 799.95,
+    "imageUrl": "/images/mesa-de-comedor-extensible-en-madera-170x95-cm-quebi.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 3,
+    "name": "Estefan",
+    "slug": "sofa-modular-de-3-piezas-estefan",
+    "category": "Sofás",
+    "description": "Sofá Modular de 3 Piezas Estefan Style",
+    "color": "Blanco",
+    "price": 1279.95,
+    "imageUrl": "/images/sofa-modular-de-3-piezas-estefan.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 4,
+    "name": "Darwys",
+    "slug": "mesa-de-centro-redonda-en-cemento-o80-cm-darwys",
+    "category": "Mesas",
+    "description": "Mesa de centro redonda en cemento (Ø80 cm) Darwys",
+    "color": "Blanco",
+    "price": 329.95,
+    "imageUrl": "/images/mesa-de-centro-redonda-en-cemento-o80-cm-darwys.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 5,
+    "name": "Teill",
+    "slug": "comprar-sillas-de-escritorio/9844-silla-teill",
+    "category": "Sillas",
+    "description": "Silla de Oficina con Ruedas y Reposacabezas Teill Black",
+    "color": "Blanco",
+    "price": 86.95,
+    "imageUrl": "/images/silla-teill.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 6,
+    "name": "Paoline",
+    "slug": "mueble-tv-en-en-acero-y-cristal-paoline",
+    "category": "Muebles",
+    "description": "Mueble TV en en acero y cristal Paoline",
+    "color": "Blanco",
+    "price": 209.95,
+    "imageUrl": "/images/mueble-tv-en-en-acero-y-cristal-paoline.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 7,
+    "name": "Lucy",
+    "slug": "silla-de-escritorio-en-chenilla-lucy",
+    "category": "Muebles",
+    "description": "Silla de Escritorio en Borreguito Lucy",
+    "color": "Blanco",
+    "price": 109.95,
+    "imageUrl": "/images/silla-de-escritorio-en-chenilla-lucy.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 8,
+    "name": "Carlise",
+    "slug": "taburete-bajo-en-chenilla-carlise",
+    "category": "Taburetes",
+    "description": "Taburete bajo en borreguito Carlise",
+    "color": "Blanco",
+    "price": 89.95,
+    "imageUrl": "/images/taburete-bajo-en-chenilla-carlise.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 9,
+    "name": "And",
+    "slug": "taburete-alto-en-chapa-de-roble-67-cm-and",
+    "category": "Taburetes",
+    "description": "Taburete Alto en Chapa de Roble (67 cm) And",
+    "color": "Blanco Gardenia",
+    "price": 89.95,
+    "imageUrl": "/images/taburete-alto-en-chapa-de-roble-67-cm-and.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 10,
+    "name": "Kerkera",
+    "slug": "set-de-jardin-de-2-sillones-y-mesa-de-centro-en-madera-y-metal-kerkera",
+    "category": "Muebles de jardín",
+    "description": "Conjunto de jardín con 2 sillones y mesa de centro en acero y madera de eucalipto Kerkera",
+    "color": "Negro",
+    "price": 249.95,
+    "imageUrl": "/images/set-de-jardin-de-2-sillones-y-mesa-de-centro-en-madera-y-metal-kerkera.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 11,
+    "name": "Nebida",
+    "slug": "lampara-de-mesa-led-inalambrica-nebida",
+    "category": "Lámparas",
+    "description": "Lámpara de mesa LED inalámbrica Nebida",
+    "color": "Blanco",
+    "price": 24.25,
+    "imageUrl": "/images/lampara-de-mesa-led-inalambrica-nebida.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 12,
+    "name": "Irune",
+    "slug": "lampara-de-mesa-en-metal-irune",
+    "category": "Lámparas",
+    "description": "Lámpara de mesa en metal Irune",
+    "color": "Beige Tapioca",
+    "price": 35.95,
+    "imageUrl": "/images/lampara-de-mesa-en-metal-irune.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 13,
+    "name": "Belvere",
+    "slug": "pack-de-2-platos-llanos-belvere",
+    "category": "Menaje",
+    "description": "Pack de 2 Platos Llanos en Gres Belvere",
+    "color": "Blanco Gardenia",
+    "price": 15.95,
+    "imageUrl": "/images/pack-de-2-platos-llanos-belvere.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 14,
+    "name": "Belvere",
+    "slug": "pack-de-2-bowls-belvere",
+    "category": "Menaje",
+    "description": "Pack de 2 Bowls en Gres Belvere",
+    "color": "Blanco",
+    "price": 15.95,
+    "imageUrl": "/images/pack-de-2-bowls-belvere.webp",
+    "quantity": "100"
+  },
+  {
+    "id": 15,
+    "name": "Zendan",
+    "slug": "set-de-2-servilletas-en-lino-zendan",
+    "category": "Textil hogar",
+    "description": "Set de 2 Servilletas en Lino Zendan",
+    "color": "Verde Bambú",
+    "price": 8.95,
+    "imageUrl": "/images/set-de-2-servilletas-en-lino-zendan.jpg",
+    "quantity": "100"
+  },
+  {
+    "id": 16,
+    "name": "Zenadia",
+    "slug": "mesa-de-centro-redonda-en-cemento-o50-cm-yalenia",
+    "category": "Mesas",
+    "description": "Mesa auxiliar redonda en cemento (Ø50 cm) Zenadia",
+    "color": "Verde Bambú",
+    "price": 199.95,
+    "imageUrl": "/images/mesa-de-centro-redonda-en-cemento-o50-cm-yalenia.webp",
+    "quantity": "100"
+  }
+]

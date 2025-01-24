@@ -1,0 +1,99 @@
+@use "../mixins";
+
+.main-section {
+  position: relative;
+  &__img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+@include mixins.respond(tablet) {
+  .main-section__content {
+    gap: 20px;
+  }
+}
+
+@include mixins.respond(large-tablet) {
+  .main-section__content {
+    gap: 40px;
+  }
+}
+
+.cards__container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  row-gap: 50px;
+
+  img {
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+  }
+  .card {
+    &__link {
+      transition: opacity 0.2s;
+    }
+    &__link:hover {
+      opacity: 0.85;
+    }
+  }
+}
+
+.product__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+#quantity {
+  border: none; /* Без рамки */
+  outline: none; /* Без фокусу */
+  text-align: center; /* Центрує текст */
+}
+#quantity:focus {
+  outline: none; /* Прибирає синій контур */
+  box-shadow: none; /* Прибирає можливі тіні */
+}
+
+/* Забирає стрілки */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+.modal-cart .modal-dialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 50%;
+  margin: 0;
+  transform: none; /* прибираємо стандартний Bootstrap transform */
+}
+
+.modal-cart .modal-content {
+  height: 100%; /* Забезпечує, що контент займає всю висоту вікна */
+  border-radius: 0; /* Прибираємо закруглення, якщо потрібно */
+}

@@ -1,11 +1,49 @@
+@use "mixins";
+
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&family=Unbounded&display=swap");
 
 $primary-font: "Open Sans", sans-serif;
 $secondary-font: "Unbounded", sans-serif;
 
-$color-red: #ff2828;
-$color-black: #000;
-$color-gray-light: #f8f7f6;
-$color-white: #fff;
+$claudy-color: #f5f4f3;
+$oyster-color: #dfdedb;
+$stormy-color: #323334;
 
-$text-color: #000;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $secondary-font;
+}
+h1 {
+  font-size: 24px;
+  letter-spacing: -5%;
+  line-height: 100%;
+  color: $oyster-color;
+}
+
+@include mixins.respond(tablet) {
+  h1 {
+    font-size: 36px;
+  }
+}
+
+@include mixins.respond(large-tablet) {
+  h1 {
+    font-size: 52px;
+  }
+}
+
+.button {
+  padding: 8px 36px;
+  color: #000;
+  background-color: $oyster-color;
+  text-decoration: underline;
+  border-radius: 8px;
+  letter-spacing: 10%;
+  font-size: 14px;
+  width: fit-content;
+  text-decoration: none;
+}

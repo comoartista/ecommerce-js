@@ -17,7 +17,7 @@ module.exports = {
   },
   devServer: {
     static: {
-      directory: path.resolve(__dirname, "dist"),
+      directory: path.resolve(__dirname, "public"), // Шлях до статичних файлів
     },
     port: 3000,
     open: true,
@@ -57,6 +57,10 @@ module.exports = {
           filename: "fonts/[name][ext]",
         },
       },
+      {
+        test: /\.json$/,
+        type: "javascript/auto", // Вбудована підтримка JSON у Webpack 5
+      },
     ],
   },
   plugins: [
@@ -66,31 +70,23 @@ module.exports = {
       template: "./src/index.html",
     }),
     new HtmlWebpackPlugin({
-      filename: "product.html",
-      template: "./src/product.html",
+      filename: "product-details.html",
+      template: "./src/product-details.html",
     }),
     new HtmlWebpackPlugin({
-      filename: "shop.html",
-      template: "./src/shop.html",
+      filename: "cart.html",
+      template: "./src/cart.html",
     }),
-    new HtmlWebpackPlugin({
-      filename: "brew-guides.html",
-      template: "./src/brew-guides.html",
-    }),
-    new HtmlWebpackPlugin({
-      filename: "subscribe.html",
-      template: "./src/subscribe.html",
-    }),
-    new HtmlWebpackPlugin({
-      filename: "merch.html",
-      template: "./src/merch.html",
-    }),
+
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css",
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: "src/images", to: "images" }],
+      patterns: [
+        { from: "src/images", to: "images" },
+        { from: "src/data.json", to: "data.json" }, // Копіюємо data.json
+      ],
     }),
   ],
 };

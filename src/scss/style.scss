@@ -1,12 +1,6 @@
-// Імпорти
-@import "variables";
-@import "mixins";
-@import "reset";
-@import "base";
-
-@import "components/button";
-@import "components/footer";
-@import "components/header";
-@import "components/swiper";
-
-@import "pages/hero";
+@use "reset";
+@use "variables";
+@use "header";
+@use "main";
+@use "mixins";
+@use "pages/index.scss";

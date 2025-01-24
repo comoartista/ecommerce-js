@@ -1,18 +1,19 @@
-// Міксин для центрованого контейнера
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@mixin flex-left {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-
-@mixin flex-space-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 767px) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $breakpoint == large-tablet {
+    @media (min-width: 1024px) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
 }
