@@ -37,6 +37,6 @@
     "bootstrap-icons": "^1.11.3",
     "express": "^4.21.1",
     "gsap": "^3.12.7",
-    "swiper": "^11.1.10"
+    "swiper": "^11.2.1"
   }
 }

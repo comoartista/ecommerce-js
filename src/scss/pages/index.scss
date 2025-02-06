@@ -1,99 +1,293 @@
 @use "../mixins";
+@use "../variables" as vars;
 
+// Carousel Controls
+.carousel-control-prev,
+.carousel-control-next {
+  display: none;
+  @include mixins.respond(tablet) {
+    display: block;
+    background-color: #fff;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.carousel-control-prev {
+  margin-left: 32px;
+}
+.carousel-control-next {
+  margin-right: 32px;
+}
+
+// Hover effects for SVG paths
+.carousel-control-prev:focus svg path,
+.carousel-control-prev:hover svg path,
+.carousel-control-next:focus svg path,
+.carousel-control-next:hover svg path {
+  stroke: black;
+}
+
+// Icon style inside the buttons
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+  width: 20px;
+  height: 20px;
+}
+
+// Carousel Indicators
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.carousel-indicators .active {
+  border-radius: 20%/50%;
+  width: 30px;
+  height: 8px;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.carousel-indicators button:not(.active) {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  color: #fff;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+// Carousel Caption
+.carousel-caption {
+  top: 50%;
+  transform: translateY(-50%);
+  bottom: auto;
+}
+
+// Carousel Image Filter
+.carousel-inner img {
+  filter: brightness(70%);
+  height: 60vh;
+  object-fit: cover;
+  @include mixins.respond(tablet) {
+    height: 70vh;
+  }
+}
+
+// Hero Title
 .main-section {
-  position: relative;
-  &__img {
-    object-fit: contain;
+  &__title {
+    max-width: 100%;
+    @include mixins.respond(tablet) {
+      max-width: 800px;
+    }
+  }
+  &__descr {
+    max-width: 100%;
+    @include mixins.respond(tablet) {
+      max-width: 460px;
+    }
+  }
+}
+
+// Banner Section
+.banner-section {
+  &__item {
+    position: relative;
+    overflow: hidden;
     height: 100%;
-    width: 100%;
+
+    img {
+      transition: transform 0.4s ease, filter 0.4s ease;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      transform-origin: center;
+    }
+    &:hover img {
+      filter: brightness(96%);
+      transform: scale(1.1);
+    }
+    &:hover .banner-section__arrow {
+      margin-left: 5px;
+      transition: margin-left 0.4s ease;
+    }
   }
 
   &__content {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 48px;
+    left: 48px;
     z-index: 1;
-    text-align: center;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    &--down {
+      top: auto;
+      bottom: 48px;
+    }
   }
 }
 
-@include mixins.respond(tablet) {
-  .main-section__content {
-    gap: 20px;
+.section-productcarousel {
+  margin-left: 15px;
+  .productCarousel {
+    margin-left: 15px;
   }
-}
-
-@include mixins.respond(large-tablet) {
-  .main-section__content {
-    gap: 40px;
+  .is-visible {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
-}
-
-.cards__container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  row-gap: 50px;
-
-  img {
-    height: 500px;
+  .product-card {
     width: 100%;
+    height: 100%;
+    &__item {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      &:hover .is-visible {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    &__label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 16px;
+    }
+    &__btn {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      max-width: 100%;
+    }
+  }
+}
+
+.product-pagination {
+  bottom: 0;
+  top: auto;
+  width: calc(100% - 15px);
+}
+
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  background-color: #000;
+}
+
+.section-values {
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    @include mixins.respond(tablet) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+  }
+  &__item {
+    padding: 48px 32px;
+    background-color: vars.$color-bg-gray;
+    h6 {
+      padding: 16px 0 8px;
+    }
+  }
+}
+
+.section-baner {
+  background-color: vars.$color-bg-gray;
+  &__img img {
+    height: 100%;
     object-fit: cover;
   }
-  .card {
-    &__link {
-      transition: opacity 0.2s;
+  &__content {
+    padding: 58px 32px;
+    @include mixins.respond(tablet) {
+      padding: 140px 15px 140px 40px;
     }
-    &__link:hover {
-      opacity: 0.85;
+    h4 {
+      max-width: 440px;
+      width: 100%;
+      @include mixins.respond(tablet) {
+        max-width: 420px;
+      }
+    }
+    p {
+      width: 330px;
+      max-width: 100%;
+      @include mixins.respond(tablet) {
+        width: 330px;
+      }
+    }
+    a {
+      width: fit-content;
     }
   }
 }
 
-.product__container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+.section-newsletter {
+  background-color: vars.$color-bg-gray;
+  @include mixins.respond(tablet) {
+    background-image: url("../images/main/newsletter-baner.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  &__content {
+    padding: 100px 0 90px;
+  }
+  &__form {
+    width: 488px;
+    max-width: 100%;
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+    input {
+      border: none;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
 }
 
-#quantity {
-  border: none; /* Без рамки */
-  outline: none; /* Без фокусу */
-  text-align: center; /* Центрує текст */
-}
-#quantity:focus {
-  outline: none; /* Прибирає синій контур */
-  box-shadow: none; /* Прибирає можливі тіні */
-}
-
-/* Забирає стрілки */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.section-articles {
+  margin: 80px 0;
+  &__img {
+    width: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 }
 
-input[type="number"] {
-  -moz-appearance: textfield; /* Firefox */
-}
-
-.modal-cart .modal-dialog {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 50%;
-  margin: 0;
-  transform: none; /* прибираємо стандартний Bootstrap transform */
-}
-
-.modal-cart .modal-content {
-  height: 100%; /* Забезпечує, що контент займає всю висоту вікна */
-  border-radius: 0; /* Прибираємо закруглення, якщо потрібно */
+.footer {
+  &-divider {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 2px;
+      background-color: #6c7275;
+      @include mixins.respond(tablet) {
+        transform: translateY(-50%) rotate(90deg);
+        left: -30px;
+        top: 50%;
+        width: 24px;
+      }
+    }
+  }
 }

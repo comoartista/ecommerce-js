@@ -7,7 +7,7 @@ export function generateProductHTML(
   const totalPrice = (price * quantity).toFixed(2);
 
   return `
-      <div class="d-flex gap-3">
+      <div class="d-flex gap-3 ">
         <div style="width: 75px; height: 100px">
           <img src="${imageUrl}" alt="${name}" class="w-100" />
         </div>

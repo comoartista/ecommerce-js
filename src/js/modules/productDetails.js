@@ -15,7 +15,7 @@ export async function displayProductDetails() {
 
   if (product) {
     const div = document.createElement("div");
-    div.classList.add("product__container");
+    div.classList.add("product__container", "row");
 
     // Render product details
     div.innerHTML = createProductDetailsHTML({
@@ -23,7 +23,29 @@ export async function displayProductDetails() {
       quantity: 1,
     });
 
-    document.querySelector("#section-product").appendChild(div);
+    document.querySelector("#section-product__wrapper").appendChild(div);
+
+    // Initialize Swiper after rendering the HTML
+    const swiperThumbs = new Swiper(".mySwiper", {
+      spaceBetween: 15,
+      slidesPerView: 4,
+      freeMode: true,
+      watchSlidesProgress: true,
+      direction: "vertical",
+      zoom: true,
+    });
+
+    new Swiper(".mySwiper2", {
+      spaceBetween: 10,
+      zoom: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      thumbs: {
+        swiper: swiperThumbs,
+      },
+    });
 
     // Logic for the increase/decrease quantity buttons
     const quantityInput = document.querySelector("#quantity");
@@ -71,9 +93,34 @@ function createProductDetailsHTML({
   price,
   quantity,
 }) {
+  const slidesHTML = imageUrl
+    .map(
+      (url) => `
+      <div class="swiper-slide">
+      <div class="swiper-zoom-container">
+        <img src="${url}" alt="${name}" />
+      </div>
+      </div>
+    `
+    )
+    .join("");
+
   return `
-    <img class="img-fluid" src="${imageUrl}" alt="${name}">
-    <div class="d-flex flex-column">
+  <div class="col-12 col-md-7">
+  <div
+    class="swiper mySwiper2 ">
+    <div class="swiper-wrapper ">
+      ${slidesHTML}
+    </div>
+  </div>
+
+  <div thumbsSlider="" class="swiper mySwiper ">
+    <div class="swiper-wrapper">
+      ${slidesHTML}
+    </div>
+  </div>
+   </div>
+    <div class="d-flex flex-column col-12 col-md-5">
       <span class="mt-3 badge text-dark border border-dark text-uppercase rounded-0 align-self-start">Special Price</span>
       <h4 class="fw-bold mt-2">${name}</h4>
       <p>${description}</p>
@@ -81,14 +128,14 @@ function createProductDetailsHTML({
       <hr class="mt-2">
       <span>Color: <span class="text-secondary">${color}</span></span>
       <span class="mt-4 small text-success"><i class="bi bi-truck"></i> En Stock, preparación y envío en 7/10 días laborables</span>
-      <form class="d-flex align-items-center gap-2 mt-3">
-        <div class="z-0 input-group border border-dark" style="max-width: 120px;">
+      <form class="d-flex align-items-center gap-2 mt-3 ">
+        <div class="z-0 input-group border border-dark  " style="max-width: 120px; ">
           <button type="button" class="btn rounded-0" id="decrease-btn">-</button>
-          <input type="number" class="form-control text-center" id="quantity" value="${quantity}" min="1" required>
+          <input type="number" class="form-control text-center py-2" id="quantity" value="${quantity}" min="1" required>
           <button type="button" class="btn rounded-0" id="increase-btn">+</button>
         </div>
         <button
-          type="button" id="add-to-cart" class="btn btn-dark w-100 rounded-0 h-100">
+          type="button" id="add-to-cart" class="btn btn-dark w-100 rounded-0 py-2">
           Añadir a la cesta <span id="total-price">${(
             price * quantity
           ).toLocaleString("de-DE")} €</span> <i class="bi bi-bag"></i>

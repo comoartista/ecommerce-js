@@ -4,14 +4,21 @@
 .header-section {
   position: relative;
   z-index: 100;
+  background: #fff;
+  width: 100%;
+  height: 60px;
+
   nav {
-    position: fixed;
-    top: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 2em;
-    color: #fff;
+    padding: 1.2em;
+    color: #000;
+  }
+
+  .isFixed {
+    position: fixed;
+    top: 0px;
     z-index: 0;
   }
 
@@ -24,7 +31,7 @@
     z-index: 1000 !important;
     top: 0;
     width: 100%;
-    padding: 2em;
+    padding: 1.2em;
     color: vars.$stormy-color;
     background: vars.$claudy-color;
     pointer-events: none;
@@ -63,7 +70,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: #fff;
+    background: vars.$stormy-color;
     transition: 0.3s all;
   }
 
@@ -94,7 +101,6 @@
     display: flex;
     gap: 1em;
   }
-
 
   @media (max-width: 900px) {
     .menu-overlay {

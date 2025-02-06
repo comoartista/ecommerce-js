@@ -1,60 +1,49 @@
 import { gsap } from "gsap";
+export function menuAnimation() {
+  let tl = gsap.timeline({ paused: true });
 
-export function menuAnimation () {
-    let tl = gsap.timeline({ paused: true });
-  
-    tl.to(".menu-overlay", {
-      duration: 1,
-      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+  tl.to(".menu-overlay", {
+    duration: 0.8,
+    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+    ease: "power2.out",
+  });
+
+  tl.from(
+    ".menu-link",
+    {
+      opacity: 0,
+      y: 40,
+      stagger: 0.03,
+      duration: 0.5,
+      ease: "power1.out",
+    },
+    "<"
+  );
+
+  tl.to(
+    ".menu-divider",
+    {
+      duration: 0.8,
+      width: "100%",
       ease: "power2.out",
-    });
-  
-    tl.from(
-      ".menu-link, .btn",
-      {
-        opacity: 0,
-        y: 60,
-        stagger: 0.05,
-        duration: 0.75,
-        ease: "power1.inOut",
-      },
-      "<",
-    );
-  
-    tl.to(
-      ".video-preview",
-      {
-        duration: 1,
-        height: "200px",
-        ease: "power2.out",
-      },
-      "<",
-    );
-  
-    tl.to(
-      ".menu-divider",
-      {
-        duration: 2,
-        width: "100%",
-        ease: "power4.out",
-      },
-      "<",
-    );
-  
-    function openMenu() {
-      document.querySelector(".menu-overlay").style.pointerEvents = "all";
-      tl.play();
-    }
-  
-    function closeMenu() {
-      document.querySelector(".menu-overlay").style.pointerEvents = "none";
-      tl.reverse();
-    }
-  
-    document.querySelector(".menu-open-btn").addEventListener("click", openMenu);
-    document
-      .querySelector(".menu-close-btn")
-      .addEventListener("click", closeMenu);
+    },
+    "<"
+  );
+
+  function openMenu() {
+    document.querySelector(".menu-overlay").style.pointerEvents = "all";
+    tl.restart();
+  }
+
+  function closeMenu() {
     tl.reverse();
-  };
-  
+    setTimeout(() => {
+      document.querySelector(".menu-overlay").style.pointerEvents = "none";
+    }, 800);
+  }
+
+  document.querySelector(".menu-open-btn").addEventListener("click", openMenu);
+  document
+    .querySelector(".menu-close-btn")
+    .addEventListener("click", closeMenu);
+}

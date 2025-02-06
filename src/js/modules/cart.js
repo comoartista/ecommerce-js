@@ -37,7 +37,7 @@ export async function addToCart(productId, quantity) {
         name: product.name,
         description: product.description,
         color: product.color,
-        imageUrl: product.imageUrl,
+        imageUrl: product.imageUrl[0],
         price: product.price,
       },
       quantity
