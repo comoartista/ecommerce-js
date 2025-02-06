@@ -169,10 +169,13 @@
     }
   }
 }
+.swiper-wrapper {
+  margin-bottom: 40px;
+}
 
-.product-pagination {
-  bottom: 0;
+#product-pagination {
   top: auto;
+  bottom: 0;
   width: calc(100% - 15px);
 }
 
