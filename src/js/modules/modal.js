@@ -11,7 +11,14 @@ export function displayModal(product, quantity) {
     const modal = new bootstrap.Modal(modalElement);
 
     const div = document.createElement("div");
-    div.classList.add("modal-content", "px-2", "h-100");
+    div.classList.add(
+      "modal-content",
+      "px-2",
+      "h-100",
+      "border-0",
+      "rounded-0",
+      "shadow-sm"
+    );
 
     div.innerHTML = `
     <div class="modal-header">

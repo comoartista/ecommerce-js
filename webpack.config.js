@@ -74,6 +74,14 @@ module.exports = {
       template: "./src/product-details.html",
     }),
     new HtmlWebpackPlugin({
+      filename: "shop.html",
+      template: "./src/shop.html",
+    }),
+    new HtmlWebpackPlugin({
+      filename: "contact-us.html",
+      template: "./src/contact-us.html",
+    }),
+    new HtmlWebpackPlugin({
       filename: "cart.html",
       template: "./src/cart.html",
     }),

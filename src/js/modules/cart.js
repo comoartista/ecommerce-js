@@ -32,6 +32,7 @@ export async function addToCart(productId, quantity) {
 
     saveToLocalStorage("cart", cart);
 
+    
     displayModal(
       {
         name: product.name,

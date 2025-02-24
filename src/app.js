@@ -19,6 +19,8 @@ import { displayCart } from "./js/modules/displayCart.js";
 import { global } from "./js/global.js";
 import { menuAnimation } from "./js/animation.js";
 import { newArrivalsList } from "./js/modules/newArrivalsLIst.js";
+import { displayShopList, shop } from "./js/modules/shop.js";
+import { addToCart } from "./js/modules/cart.js";
 
 // Initialize the application
 export function init() {
@@ -38,8 +40,11 @@ export function init() {
       case "/product-details.html":
         displayProductDetails();
         break;
+      case "/shop.html":
+        displayShopList();
+        addToCart();
+        break;
       case "/cart.html":
-        displayCart();
         break;
     }
   }

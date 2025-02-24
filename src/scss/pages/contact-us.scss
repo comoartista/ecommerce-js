@@ -1,0 +1,41 @@
+@use "../mixins";
+@use "../variables" as vars;
+
+.section-contact {
+  max-width: 992px;
+}
+.contact-data .section-values {
+  margin: 40px 0;
+  &__items {
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+    padding: 20px 0;
+
+    @include mixins.respond(tablet) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      padding: 40px 0;
+    }
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 32px;
+    background-color: vars.$color-bg-gray;
+    height: 150px;
+    h6 {
+      padding: 16px 0 8px;
+    }
+  }
+}
+
+.section-values--contact-us .section-values {
+  &__items {
+    gap: 0;
+  }
+}

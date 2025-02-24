@@ -22,8 +22,8 @@ export async function newArrivalsList() {
       div.classList.add("swiper-slide");
 
       div.innerHTML = `
-        <div class="product-card">
-          <div class="product-card__item">
+        <a href="product-details.html?id=${slug}" class="product-card">
+          <div  class="product-card__item">
             <img src="${imageUrl[0]}" alt="product" />
             <div class="product-card__label d-flex flex-column gap-1">
               <div class="product-card__label-item badge text-bg-light">New</div>
@@ -33,9 +33,9 @@ export async function newArrivalsList() {
           </div>
           <div class="product-card__content text-start mt-1">
             <h5 class="product-card__title fs-6 fw-bold">${name}</h5>
-            <p class="product-card__new-price fs-6 fw-bold">${price}</p>
+            <p class="product-card__new-price fs-6 fw-bold">${price}€</p>
           </div>
-        </div>
+        </a>
       `;
 
       fragment.appendChild(div);
