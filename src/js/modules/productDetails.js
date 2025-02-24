@@ -51,19 +51,31 @@ export async function displayProductDetails() {
     const quantityInput = document.querySelector("#quantity");
     const totalPriceElement = document.querySelector("#total-price");
 
-    document.querySelector("#increase-btn").addEventListener("click", () => {
-      const updatedQuantity = increaseQuantity(productId);
-      quantityInput.value = updatedQuantity;
-      updateTotalPrice(totalPriceElement, product.price, updatedQuantity);
-    });
+    document
+      .querySelector("#increase-btn")
+      .addEventListener("click", async () => {
+        const updatedQuantity = await increaseQuantity(productId);
+        console.log("Updated Quantity (increase):", updatedQuantity); // Логування
+        if (updatedQuantity !== undefined && updatedQuantity > 0) {
+          quantityInput.value = updatedQuantity;
+          updateTotalPrice(totalPriceElement, product.price, updatedQuantity);
+        } else {
+          console.error("Invalid quantity value");
+        }
+      });
 
-    document.querySelector("#decrease-btn").addEventListener("click", () => {
-      const updatedQuantity = decreaseQuantity(productId);
-      if (updatedQuantity > 0) {
-        quantityInput.value = updatedQuantity;
-        updateTotalPrice(totalPriceElement, product.price, updatedQuantity);
-      }
-    });
+    document
+      .querySelector("#decrease-btn")
+      .addEventListener("click", async () => {
+        const updatedQuantity = await decreaseQuantity(productId);
+        console.log("Updated Quantity (decrease):", updatedQuantity); // Логування
+        if (updatedQuantity !== undefined && updatedQuantity > 0) {
+          quantityInput.value = updatedQuantity;
+          updateTotalPrice(totalPriceElement, product.price, updatedQuantity);
+        } else {
+          console.error("Invalid quantity value");
+        }
+      });
 
     // Update total price on load
     upgradeTotalPrice(product.price);

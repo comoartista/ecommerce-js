@@ -22,12 +22,17 @@ import { newArrivalsList } from "./js/modules/newArrivalsLIst.js";
 import { displayShopList, shop } from "./js/modules/shop.js";
 import { addToCart } from "./js/modules/cart.js";
 
+import headerHTML from "./components/header/header.html";
+import footerHTML from "./components/footer/footer.html";
 // Initialize the application
 export function init() {
-  console.log("init function called"); // Debug log to check if the function is executed
-
+  document.body.innerHTML = headerHTML + document.body.innerHTML; // Вставляє хедер перед основним контентом
   menuAnimation();
 
+  const footerContainer = document.querySelector("#footer");
+  if (footerContainer) {
+    footerContainer.innerHTML = footerHTML; // Вставляє HTML футера в контейнер
+  }
   // Ensure global.currentPage exists before using it
   if (global?.currentPage) {
     const page = global.currentPage.toLowerCase().replace(/\/$/, ""); // Normalize page path

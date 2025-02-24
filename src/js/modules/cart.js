@@ -4,17 +4,22 @@ import { displayModal } from "./modal.js";
 
 // Adds a product to the cart or updates its quantity if it already exists
 export async function addToCart(productId, quantity) {
-  if (quantity <= 0 || isNaN(quantity)) {
+  if (isNaN(quantity) || quantity <= 0) {
     console.error("Invalid quantity value.");
     return;
   }
 
   const cart = getFromLocalStorage("cart") || [];
 
-  const results = await fetchData();
-  const product = results.find((item) => item.slug === productId);
+  try {
+    const results = await fetchData();
+    const product = results.find((item) => item.slug === productId);
 
-  if (product) {
+    if (!product) {
+      console.error("Product not found:", productId);
+      return;
+    }
+
     // Checks if the product already exists in the cart
     const existingProduct = cart.find((item) => item.slug === productId);
 
@@ -30,28 +35,37 @@ export async function addToCart(productId, quantity) {
       });
     }
 
-    saveToLocalStorage("cart", cart);
+    saveToLocalStorage("cart", [...cart]);
 
-    
     displayModal(
       {
         name: product.name,
-        description: product.description,
-        color: product.color,
-        imageUrl: product.imageUrl[0],
+        description: product.description || "No description available",
+        color: product.color || "Unknown",
+        imageUrl: Array.isArray(product.imageUrl)
+          ? product.imageUrl[0]
+          : product.imageUrl,
         price: product.price,
       },
       quantity
     );
+  } catch (error) {
+    console.error("Error fetching product data:", error);
   }
 }
 
 export function updateProductQuantityInCart(productId, newQuantity) {
-  const cart = getFromLocalStorage("cart");
+  if (isNaN(newQuantity) || newQuantity <= 0) {
+    console.error("Invalid quantity value.");
+    return;
+  }
+
+  const cart = getFromLocalStorage("cart") || [];
   const product = cart.find((item) => item.slug === productId);
+
   if (product) {
     product.quantity = newQuantity;
-    saveToLocalStorage("cart", cart);
+    saveToLocalStorage("cart", [...cart]);
   }
 }
 

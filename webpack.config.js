@@ -61,6 +61,10 @@ module.exports = {
         test: /\.json$/,
         type: "javascript/auto", // Вбудована підтримка JSON у Webpack 5
       },
+      {
+        test: /\.html$/,
+        use: ["html-loader"],
+      },
     ],
   },
   plugins: [
