@@ -2,10 +2,10 @@ import { generateProductHTML } from "./generateProductHTML.js";
 
 export function displayCart(product, quantity) {
   const cartSection = document.querySelector("#cart-section");
-  console.log(cartSection);
 
-  cartSection.innerHTML = "";
-
+  if (cartSection.hasChildNodes()) {
+    cartSection.innerHTML = "";
+  }
   const div = document.createElement("div");
   div.classList.add("container-fluid");
   div.innerHTML = `

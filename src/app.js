@@ -24,6 +24,7 @@ import { addToCart } from "./js/modules/cart.js";
 
 import headerHTML from "./components/header/header.html";
 import footerHTML from "./components/footer/footer.html";
+import { getFromLocalStorage } from "./js/modules/localStorage.js";
 // Initialize the application
 export function init() {
   document.body.innerHTML = headerHTML + document.body.innerHTML; // Вставляє хедер перед основним контентом
@@ -50,6 +51,12 @@ export function init() {
         addToCart();
         break;
       case "/cart.html":
+        const cartItems = getFromLocalStorage("cart") || [];
+        if (cartItems.length > 0) {
+          cartItems.forEach((item) => displayCart(item, item.quantity));
+        } else {
+          displayCart(); // Порожній кошик
+        }
         break;
     }
   }

@@ -9,7 +9,7 @@ export function generateProductHTML(
   return `
       <div class="d-flex gap-3 ">
         <div style="width: 75px; height: 100px">
-          <img src="${imageUrl}" alt="${name}" class="w-100" />
+          <img src="${imageUrl[0]}" alt="${name}" class="w-100" />
         </div>
         <div class="w-100">
           <div class="pl-1 d-flex justify-content-between align-items-center">
