@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Simplicity Shop - Shop Page</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <script defer src="/bundle.js"></script><link href="/main.css" rel="stylesheet"></head>
+  <body>
+    <section class="shop-hero">
+      <div class="container-fluid">
+        <div class="shop-hero__img">
+          <img src="/images/shop-hero.jpg" alt="image" />
+        </div>
+        <div class="shop-hero__content">
+          <h1 class="heading-3">Shop Page</h1>
+          <p class="mt-3">Let’s design the place you always imagined.</p>
+        </div>
+      </div>
+    </section>
+    <div class="container-fluid section-products d-flex gap-4">
+      <aside class="filter-sidebar">
+        <div class="d-flex align-items-center gap-1 fs-5 fw-semibold">
+          <svg
+            width="20"
+            height="18"
+            viewBox="0 0 20 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M1 4H4M4 4C4 5.65685 5.34315 7 7 7C8.65685 7 10 5.65685 10 4C10 2.34315 8.65685 1 7 1C5.34315 1 4 2.34315 4 4ZM1 14H7M16 14H19M16 14C16 15.6569 14.6569 17 13 17C11.3431 17 10 15.6569 10 14C10 12.3431 11.3431 11 13 11C14.6569 11 16 12.3431 16 14ZM13 4H19"
+              stroke="#141718"
+              stroke-width="1.5"
+              stroke-linecap="round" />
+          </svg>
+          Filter
+        </div>
+        <div class="mt-4 mb-4">
+          <div class="text-uppercase mb-2 fw-bold">Categories</div>
+          <ul
+            class="categories-list categories-list--sidebar d-flex flex-column gap-2">
+            <li data-category="All rooms">All Rooms</li>
+            <li data-category="Bedroom">Bedroom</li>
+            <li data-category="Kitchen">Kitchen</li>
+            <li data-category="Bathroom">Bathroom</li>
+            <li data-category="Dinning">Dinning</li>
+            <li data-category="Outdoor">Outdoor</li>
+          </ul>
+        </div>
+        <h3>PRICE</h3>
+        <div class="d-flex flex-column gap-2">
+          <label class="d-flex justify-content-between align-items-center gap-1"
+            >All Price <input type="checkbox" id="allPrices"
+          /></label>
+          <label class="d-flex justify-content-between align-items-center gap-1"
+            ><div>$0.00 - 99.99</div>
+            <input type="checkbox" class="price-range" value="0-99.99"
+          /></label>
+          <label class="d-flex justify-content-between align-items-center gap-1"
+            ><div>$100.00 - 199.99</div>
+            <input type="checkbox" class="price-range" value="100-199.99" />
+          </label>
+          <label class="d-flex justify-content-between align-items-center gap-1"
+            ><div>$200.00 - 299.99</div>
+            <input type="checkbox" class="price-range" value="200-299.99" />
+          </label>
+          <label class="d-flex justify-content-between align-items-center gap-1"
+            ><div>$300.00 - 499.99</div>
+            <input type="checkbox" class="price-range" value="300-399.99" />
+          </label>
+          <label class="d-flex justify-content-between align-items-center gap-1"
+            ><div>$400.00+</div>
+            <input type="checkbox" class="price-range" value="400+" />
+          </label>
+        </div>
+      </aside>
+      <main>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center gap-1 fs-5 fw-semibold">
+            Living room
+          </div>
+          <div class="d-flex gap-5 align-items-center">
+            <div class="dropdown">
+              <button class="dropdown-btn">
+                Sort By
+                <svg width="12" height="8">
+                  <use xlink:href="/fonts/icons.svg#icon-arrow-down"></use>
+                </svg>
+              </button>
+              <ul class="categories-list--dropdown">
+                <li data-category="All rooms">All Rooms</li>
+                <li data-category="Bedroom">Bedroom</li>
+                <li data-category="Kitchen">Kitchen</li>
+                <li data-category="Bathroom">Bathroom</li>
+                <li data-category="Dinning">Dinning</li>
+                <li data-category="Outdoor">Outdoor</li>
+              </ul>
+            </div>
+            <div class="toolbar">
+              <button class="btn-grid-toggle" data-cols="3">
+                <svg width="24" height="25">
+                  <use xlink:href="/fonts/icons.svg#icon-grid-4"></use>
+                </svg>
+              </button>
+              <button class="btn-grid-toggle" data-cols="5">
+                <svg width="24" height="25">
+                  <use xlink:href="/fonts/icons.svg#icon-grid-9"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          id="products-list"
+          class="products-list mt-4 grid-template-columns-3"></div>
+      </main>
+    </div>
+
+    <section class="section-newsletter container-fluid">
+      <div
+        class="section-newsletter__content d-flex flex-column align-items-center">
+        <h4 class="heading-4 mb-2">Join Our Newsletter</h4>
+        <p>Sign up for deals, new products and promotions</p>
+        <form class="d-flex mt-3 section-newsletter__form">
+          <div class="form-group flex-grow-1 position-relative">
+            <i
+              class="fas fa-envelope position-absolute top-50 start-0 translate-middle-y"></i>
+            <input
+              type="text"
+              class="form-control bg-transparent ps-4"
+              placeholder="Enter your email" />
+          </div>
+          <button type="submit" class="btn btn-dark">Signup</button>
+        </form>
+      </div>
+    </section>
+    <footer id="footer" class="bg-black text-white pt-5 pb-3"></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  </body>
+</html>

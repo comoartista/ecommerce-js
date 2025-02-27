@@ -7,7 +7,7 @@ module.exports = {
   mode: "development",
   entry: "./src/app.js",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "../server/public"),
     filename: "bundle.js",
     publicPath: "/",
     assetModuleFilename: "images/[name][ext]",
@@ -17,7 +17,7 @@ module.exports = {
   },
   devServer: {
     static: {
-      directory: path.resolve(__dirname, "public"), // Шлях до статичних файлів
+      directory: path.resolve(__dirname, "../server/public"), // The way for a static folder
     },
     port: 3000,
     open: true,

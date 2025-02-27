@@ -1,216 +1,25 @@
 const express = require("express");
 const router = express.Router();
-
-const products = [
-  {
-    id: 1,
-    name: "Indira",
-    slug: "cama-en-madera-indira",
-    category: ["All rooms", "Bedroom", "New Arrivals", "Camas"],
-    description: "Cama para colchón 160x200cm en madera natural Indira",
-    color: "Madera Natural",
-    price: "489.95",
-    imageUrl: [
-      "/images/shop/cama-en-madera-indira1.webp",
-      "/images/shop/cama-en-madera-indira2.webp",
-      "/images/shop/cama-en-madera-indira3.webp",
-      "/images/shop/cama-en-madera-indira4.webp",
-    ],
-    quantity: "100",
-  },
-  {
-    id: 2,
-    name: "Jaliya",
-    slug: "lampara-de-mesa-en-metal-jaliya",
-    category: ["Lamparas", "New Arrivals", "All rooms", "Bedroom"],
-    description: "Lámpara de Mesa en Metal Jaliya",
-    color: "Blanco",
-
-    price: 25.95,
-    imageUrl: [
-      "/images/shop/lampara-de-mesa-en-metal-jaliya1.webp",
-      "/images/shop/lampara-de-mesa-en-metal-jaliya2.webp",
-      "/images/shop/lampara-de-mesa-en-metal-jaliya3.webp",
-      "/images/shop/lampara-de-mesa-en-metal-jaliya4.webp",
-    ],
-    quantity: "100",
-  },
-  {
-    id: 3,
-    name: "Paoline",
-    slug: "mesita-de-noche-en-acero-y-cristal-paoline",
-    category: ["New Arrivals", "All rooms", "Bedroom"],
-    description: "Mesita de noche en acero y cristal Paoline",
-    color: "Gris Cromado",
-    price: 129.95,
-    imageUrl: [
-      "/images/shop/mesita-de-noche-en-acero-y-cristal-paoline1.webp",
-      "/images/shop/mesita-de-noche-en-acero-y-cristal-paoline2.webp",
-      "/images/shop/mesita-de-noche-en-acero-y-cristal-paoline3.webp",
-      "/images/shop/mesita-de-noche-en-acero-y-cristal-paoline4.webp",
-    ],
-    quantity: "100",
-  },
-  {
-    id: 4,
-    name: "Declan",
-    slug: "mesa-de-centro-redonda-en-cemento-o80-cm-darwys",
-    category: ["Cojines", "New Arrivals", "All rooms", "Bedroom"],
-    description: "Cojín rectangular de algodón (30x50 cm) Declan",
-    color: "Blanco",
-    price: 8.95,
-    imageUrl: [
-      "/images/shop/cojin-rectangular-de-algodon-30x50-cm-declan1.webp",
-      "/images/shop/cojin-rectangular-de-algodon-30x50-cm-declan2.webp",
-      "/images/shop/cojin-rectangular-de-algodon-30x50-cm-declan3.webp",
-      "/images/shop/cojin-rectangular-de-algodon-30x50-cm-declan4.webp",
-    ],
-    quantity: "100",
-  },
-  {
-    id: 5,
-    name: "Declan",
-    slug: "comprar-sillas-de-escritorio/9844-silla-teill",
-    category: ["Cojines", "New Arrivals", "All rooms", "Bedroom"],
-    description: "Cojín cuadrado de algodón (45x45 cm) Declan",
-    color: "Blanco",
-    price: 10.95,
-    imageUrl: [
-      "/images/shop/cojin-cuadrado-de-algodon-45x45-cm-declan1.webp",
-      "/images/shop/cojin-cuadrado-de-algodon-45x45-cm-declan2.webp",
-      "/images/shop/cojin-cuadrado-de-algodon-45x45-cm-declan3.webp",
-      "/images/shop/cojin-cuadrado-de-algodon-45x45-cm-declan4.webp",
-    ],
-    quantity: "100",
-  },
-  {
-    id: 6,
-    name: "Cianan",
-    slug: "mueble-tv-en-en-acero-y-cristal-paoline",
-    category: ["Cojines", "New Arrivals", "All rooms", "Bedroom"],
-    description: "Cojín cuadrado de algodón (45x45 cm) Cianan",
-    color: "Verde Laurel",
-    price: 10.95,
-    imageUrl: [
-      "/images/shop/cojin-cuadrado-de-algodon-45x45-cm-cianan1.webp",
-      "/images/shop/cojin-cuadrado-de-algodon-45x45-cm-cianan2.webp",
-      "/images/shop/cojin-cuadrado-de-algodon-45x45-cm-cianan3.webp",
-      "/images/shop/cojin-cuadrado-de-algodon-45x45-cm-cianan4.webp",
-    ],
-    quantity: "100",
-  },
-  {
-    id: 7,
-    name: "Silenora",
-    slug: "lampara-de-mesa-en-hierro-silenora",
-    category: ["Lámparas de mesa", "New Arrivals", "All rooms", "Bedroom"],
-    description: "Lámpara de mesa en hierro Silenora",
-    color: "Beige Tapioca",
-    price: 28.95,
-    imageUrl: [
-      "/images/shop/lampara-de-mesa-en-hierro-silenora1.webp",
-      "/images/shop/lampara-de-mesa-en-hierro-silenora2.webp",
-      "/images/shop/lampara-de-mesa-en-hierro-silenora3.webp",
-      "/images/shop/lampara-de-mesa-en-hierro-silenora4.webp",
-    ],
-    quantity: "100",
-  },
-  {
-    id: 8,
-    name: "Enid",
-    slug: "cojin-cuadrado-de-terciopelo-de-algodon-40x40-cm-enid",
-    category: ["Cojines", "New Arrivals", "All rooms", "Bedroom"],
-    description: "Cojín cuadrado de terciopelo de algodón (40x40 cm) Enid",
-    color: "Blanco",
-    price: 8.95,
-    imageUrl: [
-      "/images/shop/cojin-cuadrado-de-terciopelo-de-algodon-40x40-cm-enid1.webp",
-      "/images/shop/cojin-cuadrado-de-terciopelo-de-algodon-40x40-cm-enid2.webp",
-      "/images/shop/cojin-cuadrado-de-terciopelo-de-algodon-40x40-cm-enid3.webp",
-      "/images/shop/cojin-cuadrado-de-terciopelo-de-algodon-40x40-cm-enid4.webp",
-    ],
-    quantity: "100",
-  },
-  {
-    id: 9,
-    name: "Lioare",
-    slug: "pack-de-4-vasos-de-vidrio-45-cl-lioare",
-    category: ["Menaje", "New Arrivals", "All rooms", "Kitchen"],
-    description: "Pack de 4 vasos de vidrio 45 cl Lioare",
-    color: "Transparente",
-    price: 17.95,
-    imageUrl: [
-      "/images/shop/pack-de-4-vasos-de-vidrio-45-cl-lioare1.webp",
-      "/images/shop/pack-de-4-vasos-de-vidrio-45-cl-lioare2.webp",
-      "/images/shop/pack-de-4-vasos-de-vidrio-45-cl-lioare3.webp",
-      "/images/shop/pack-de-4-vasos-de-vidrio-45-cl-lioare4.webp",
-    ],
-    quantity: "100",
-  },
-  {
-    id: 10,
-    name: "Maidina",
-    slug: "manta-plaid-en-chenilla-maidina",
-    category: ["Textil hogar", "New Arrivals", "All rooms", "Bedroom"],
-    description: "Manta plaid en chenilla Maidina",
-    color: "Gris Grafito",
-    price: 9.95,
-    imageUrl: [
-      "/images/shop/manta-plaid-en-chenilla-maidina1.jpg",
-      "/images/shop/manta-plaid-en-chenilla-maidina2.webp",
-      "/images/shop/manta-plaid-en-chenilla-maidina3.webp",
-      "/images/shop/manta-plaid-en-chenilla-maidina4.webp",
-    ],
-    quantity: "100",
-  },
-  {
-    id: 11,
-    name: "Lioare",
-    slug: "pack-de-4-vasos-de-vidrio-45-cl-lioare",
-    category: ["Menaje", "New Arrivals", "All rooms", "Kitchen"],
-    description: "Jarra de vidrio 1 L Lioare",
-    color: "Transparente",
-    price: 15.95,
-    imageUrl: [
-      "/images/shop/jarra-de-vidrio-1-l-lioare1.webp",
-      "/images/shop/jarra-de-vidrio-1-l-lioare2.webp",
-      "/images/shop/jarra-de-vidrio-1-l-lioare3.webp",
-      "/images/shop/jarra-de-vidrio-1-l-lioare4.webp",
-    ],
-    quantity: "100",
-  },
-  {
-    id: 12,
-    name: "Tirset",
-    slug: "manta-plaid-en-chenilla-tirset",
-    category: ["Textil hogar", "New Arrivals", "All rooms", "Kitchen"],
-    description: "Manta plaid en chenilla Tirset",
-    color: "Rojo Cedro",
-    price: 14.95,
-    imageUrl: [
-      "/images/shop/manta-plaid-en-chenilla-maidina1.jpg",
-      "/images/shop/manta-plaid-en-chenilla-maidina2.webp",
-      "/images/shop/manta-plaid-en-chenilla-maidina3.webp",
-      "/images/shop/manta-plaid-en-chenilla-maidina4.webp",
-    ],
-    quantity: "100",
-  },
-];
+const Product = require("../models/Product");
 
 //Get all products
-router.get("/", (req, res) => {
-  res.json({ success: true, data: products });
+router.get("/", async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json({ success: true, data: products });
+  } catch (error) {
+    res.status(500).json({ success: false, error: "Something went wrong" });
+  }
 });
 
 //Get single product
-router.get("/:id", (req, res) => {
-  const product = products.find((product) => product.id === +req.params.id);
-
-  if (!product) {
-    res.status(404).json({ success: false, error: "Resource not found" });
-    return;
+router.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.json({ success: true, data: product });
+  } catch {
+    res.status(500).json({ success: false, error: "Something went wrong" });
   }
-  res.json({ success: true, data: product });
 });
 
 module.exports = router;

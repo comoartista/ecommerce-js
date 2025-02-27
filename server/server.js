@@ -1,7 +1,20 @@
+const path = require("path");
 const express = require("express");
-const port = 5001;
+const cors = require("cors");
+
+require("dotenv").config();
+
+const port = process.env.PORT;
+
+const connectDB = require("./config/db");
+
+connectDB();
 
 const app = express();
+app.use(cors({ origin: "http://localhost:3000" }));
+
+//Static Folder
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the app" });
