@@ -88,6 +88,9 @@ input[type="checkbox"] {
 
 .shop-hero {
   position: relative;
+  height: 350px;
+  overflow-y: hidden;
+
   &__content {
     position: absolute;
     top: 50%;

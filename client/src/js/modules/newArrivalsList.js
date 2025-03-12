@@ -3,7 +3,6 @@ import { fetchData } from "./data.js";
 export async function newArrivalsList() {
   console.log("newArrivalsList function called");
 
-  // Перевірка наявності елементу пагінації перед усіма діями
   const paginationEl = document.querySelector("#product-pagination");
 
   if (paginationEl) {
@@ -16,7 +15,6 @@ export async function newArrivalsList() {
     console.log("swiperWrapper:", swiperWrapper);
     console.log("paginationEl:", paginationEl);
 
-    // Додаємо слайди
     results.forEach(({ name, description, slug, imageUrl, price }) => {
       const div = document.createElement("div");
       div.classList.add("swiper-slide");
@@ -43,14 +41,13 @@ export async function newArrivalsList() {
 
     swiperWrapper.appendChild(fragment);
 
-    // Ініціалізація Swiper після додавання слайдів
     const swiper = new Swiper(".swiper-newproducts", {
       slidesPerView: 1.5,
       spaceBetween: 16,
       pagination: {
-        el: "#product-pagination", // Вказуємо правильний id
-        clickable: true, // Дозволяє клікабельність
-        type: "progressbar", // Тип пагінації (progressbar, bullets, etc.)
+        el: "#product-pagination",
+        clickable: true,
+        type: "progressbar",
       },
       navigation: {
         nextEl: ".swiper-button-next",
@@ -63,8 +60,8 @@ export async function newArrivalsList() {
       },
     });
 
-    console.log("Swiper initialized"); // Лог для підтвердження ініціалізації
+    console.log("Swiper initialized");
   } else {
-    console.log("pagination element not found"); // Якщо пагінація не знайдена
+    console.log("pagination element not found");
   }
 }
