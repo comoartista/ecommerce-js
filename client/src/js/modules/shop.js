@@ -1,38 +1,41 @@
-import { fetchData } from "./data.js";
+import { fetchProducts } from "./products";
 
 // Function to fetch and display shop products based on category and price filters
 export async function displayShopList(category = "All rooms") {
-  const results = await fetchData();
-  const container = document.querySelector("#products-list");
-  container.innerHTML = "";
+  try {
+    // Fetch products asynchronously
+    const results = await fetchProducts();
+    const container = document.querySelector("#products-list");
+    container.innerHTML = ""; // Clear current product list
 
-  const selectedPriceRanges = getSelectedPriceRanges();
+    const selectedPriceRanges = getSelectedPriceRanges();
 
-  // Filter products by category
-  let filteredResults =
-    category === "All rooms"
-      ? results
-      : results.filter((product) => product.category.includes(category));
+    // Filter products by category
+    let filteredResults =
+      category === "All rooms"
+        ? results
+        : results.filter((product) => product.category.includes(category));
 
-  // Apply price filter if any range is selected
-  if (selectedPriceRanges.length > 0) {
-    filteredResults = filteredResults.filter((product) => {
-      const price = parseFloat(product.price);
-      return selectedPriceRanges.some(([min, max]) =>
-        max ? price >= min && price <= max : price >= min
-      );
-    });
+    // Apply price filter if any range is selected
+    if (selectedPriceRanges.length > 0) {
+      filteredResults = filteredResults.filter((product) => {
+        const price = parseFloat(product.price);
+        return selectedPriceRanges.some(([min, max]) =>
+          max ? price >= min && price <= max : price >= min
+        );
+      });
+    }
+
+    // Render filtered products
+    renderProducts(filteredResults, container);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    // Optionally, display a message to the user about the error
   }
-
-  renderProducts(filteredResults, container);
-  // Initialize event listeners
-  setupPriceFilterListeners();
-  setupCategoryListeners();
-  setupGridToggleListeners();
 }
 
 // Function to render products on the page
-function renderProducts(products, container) {
+export function renderProducts(products, container) {
   const fragment = document.createDocumentFragment();
 
   products.forEach(({ name, imageUrl, price, slug }) => {
@@ -68,69 +71,69 @@ function getSelectedPriceRanges() {
   );
 }
 
-// Event listeners for price range filters
-function setupPriceFilterListeners() {
-  document.querySelectorAll(".price-range, #allPrices").forEach((checkbox) => {
+// Function to reset price filters
+function resetPriceFilters() {
+  // Reset all price range checkboxes
+  document.querySelectorAll(".price-range").forEach((checkbox) => {
+    checkbox.checked = false;
+  });
+}
+
+// Setup event listeners for price filter changes
+export function setupPriceFilterListeners() {
+  // Add event listeners to price filter checkboxes
+  document.querySelectorAll(".price-range").forEach((checkbox) => {
     checkbox.addEventListener("change", () => displayShopList());
   });
 
-  // Event listener for "All Prices" checkbox
+  // Reset filters when "All Prices" is selected
   document.querySelector("#allPrices").addEventListener("change", function () {
-    if (this.checked) {
-      document.querySelectorAll(".price-range").forEach((checkbox) => {
-        checkbox.checked = false;
-      });
+    if (this.checked) resetPriceFilters();
+    displayShopList();
+  });
+}
+
+// Category click handler
+export function setupCategoryListeners() {
+  const categoryList = document.querySelector(".categories-list");
+
+  categoryList.addEventListener("click", (event) => {
+    const target = event.target;
+
+    // Only process clicks on list items
+    if (target.tagName === "LI") {
+      // Set active category
+      document
+        .querySelectorAll(".categories-list li")
+        .forEach((li) => li.classList.remove("active--categories-list"));
+      target.classList.add("active--categories-list");
+
+      // Get the category from data attribute or text content
+      const category =
+        target.getAttribute("data-category") || target.textContent.trim();
+      displayShopList(category);
     }
   });
 }
 
-// Event listener for category selection
-function setupCategoryListeners() {
-  document
-    .querySelectorAll(".categories-list, .dropdown-content")
-    .forEach((list) => {
-      list.addEventListener("click", (event) => {
-        const target = event.target;
-        const category =
-          target.getAttribute("data-category") || target.textContent.trim();
-
-        if (target.tagName === "LI" || target.tagName === "A") {
-          // Видаляємо активний клас у категоріях списку
-          document
-            .querySelectorAll(".categories-list li")
-            .forEach((li) => li.classList.remove("active--categories-list"));
-
-          // Додаємо активний клас тільки у списку категорій
-          if (target.tagName === "LI") {
-            target.classList.add("active--categories-list");
-          }
-
-          displayShopList(category);
-        }
-      });
-    });
-}
-
-// Event listeners for grid view toggle buttons
-function setupGridToggleListeners() {
+// Setup grid toggle layout
+export function setupGridToggleListeners() {
   document.querySelectorAll(".btn-grid-toggle").forEach((btn) => {
     btn.addEventListener("click", () => {
       const container = document.querySelector("#products-list");
       const cols = btn.getAttribute("data-cols");
 
-      // Видаляємо старі класи
+      // Update grid layout by removing old classes and adding new one
       container.classList.remove(
         "grid-template-columns-3",
         "grid-template-columns-5"
       );
       container.classList.add(`grid-template-columns-${cols}`);
 
-      // Знімаємо активний стан з усіх кнопок
-      document.querySelectorAll(".btn-grid-toggle").forEach((b) => {
-        b.classList.remove("active");
-      });
-
-      // Додаємо активний стан до натиснутої кнопки
+      // Highlight the active grid layout button
+      document
+        .querySelectorAll(".btn-grid-toggle")
+        .forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
     });
   });

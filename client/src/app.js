@@ -1,39 +1,48 @@
-// Import Swiper and its styles
+// Import Swiper
 import Swiper from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
-// Import Bootstrap and its styles
 import * as bootstrap from "bootstrap"; // Imports all Bootstrap components
+// Import Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 // Import custom styles
 import "./scss/style.scss";
 
 // Import project modules
-import { displayProducts } from "./js/modules/productList.js";
-import { displayProductDetails } from "./js/modules/productDetails.js";
-import { displayCart } from "./js/modules/displayCart.js";
+import { productDetails } from "./js/modules/productDetails.js";
 import { global } from "./js/global.js";
 import { menuAnimation } from "./js/animation.js";
-import { newArrivalsList } from "./js/modules/newArrivalsLIst.js";
-import { displayShopList, shop } from "./js/modules/shop.js";
-import { addToCart } from "./js/modules/cart.js";
+import { displayNewArrivals } from "./js/modules/displayNewArrivals.js";
+import {
+  displayShopList,
+  setupCategoryListeners,
+  setupGridToggleListeners,
+  setupPriceFilterListeners,
+} from "./js/modules/shop.js";
+import { renderCartPage, updateCartCount } from "./js/modules/cart.js";
 
 import headerHTML from "./components/header/header.html";
 import footerHTML from "./components/footer/footer.html";
-import { getFromLocalStorage } from "./js/modules/localStorage.js";
+
 // Initialize the application
 export function init() {
-  document.body.innerHTML = headerHTML + document.body.innerHTML; // Вставляє хедер перед основним контентом
+  // Inserts the header before the main content
+  document.body.innerHTML = headerHTML + document.body.innerHTML;
   menuAnimation();
 
+  // Inserts the footer HTML into the container
   const footerContainer = document.querySelector("#footer");
   if (footerContainer) {
-    footerContainer.innerHTML = footerHTML; // Вставляє HTML футера в контейнер
+    footerContainer.innerHTML = footerHTML;
   }
+
+  document.querySelector("#cart-button").addEventListener("click", (e) => {
+    e.preventDefault();
+
+    window.location.href = "cart.html";
+  });
+
   // Ensure global.currentPage exists before using it
   if (global?.currentPage) {
     const page = global.currentPage.toLowerCase().replace(/\/$/, ""); // Normalize page path
@@ -41,24 +50,23 @@ export function init() {
     switch (page) {
       case "":
       case "/index.html":
-        newArrivalsList();
+        displayNewArrivals();
         break;
       case "/product-details.html":
-        displayProductDetails();
+        productDetails();
         break;
       case "/shop.html":
+        setupPriceFilterListeners();
+        setupCategoryListeners();
+        setupGridToggleListeners();
+
         displayShopList();
-        addToCart();
         break;
       case "/cart.html":
-        const cartItems = getFromLocalStorage("cart") || [];
-        if (cartItems.length > 0) {
-          cartItems.forEach((item) => displayCart(item, item.quantity));
-        } else {
-          displayCart(); // Порожній кошик
-        }
+        renderCartPage();
         break;
     }
+    updateCartCount();
   }
 }
 

@@ -1,10 +1,9 @@
-import { fetchData } from "./data.js";
-import { saveToLocalStorage, getFromLocalStorage } from "./localStorage.js";
-import { displayModal } from "./modal.js";
+import { fetchProducts } from "./products";
+import { displayModal } from "../modules/modal.js";
+import { getFromLocalStorage, saveToLocalStorage } from "./localStorage.js";
 
-// Adds a product to the cart or updates its quantity if it already exists
 export async function addToCart(productId, quantity) {
-  if (isNaN(quantity) || quantity <= 0) {
+  if (!Number.isInteger(quantity) || quantity <= 0) {
     console.error("Invalid quantity value.");
     return;
   }
@@ -12,30 +11,31 @@ export async function addToCart(productId, quantity) {
   const cart = getFromLocalStorage("cart") || [];
 
   try {
-    const results = await fetchData();
-    const product = results.find((item) => item.slug === productId);
+    const products = await fetchProducts();
+    const product = products.find((item) => item.slug === productId);
 
     if (!product) {
       console.error("Product not found:", productId);
       return;
     }
 
-    // Checks if the product already exists in the cart
     const existingProduct = cart.find((item) => item.slug === productId);
 
     if (existingProduct) {
-      existingProduct.quantity += quantity; // Updates the quantity
+      existingProduct.quantity += quantity;
     } else {
       cart.push({
         slug: product.slug,
         name: product.name,
         imageUrl: product.imageUrl,
         price: product.price,
+        description: product.description || "Sin descripción",
+        color: product.color || "Sin color",
         quantity,
       });
     }
 
-    saveToLocalStorage("cart", [...cart]);
+    saveToLocalStorage("cart", cart);
 
     displayModal(
       {
@@ -46,6 +46,7 @@ export async function addToCart(productId, quantity) {
           ? product.imageUrl[0]
           : product.imageUrl,
         price: product.price,
+        slug: product.slug,
       },
       quantity
     );
@@ -55,7 +56,7 @@ export async function addToCart(productId, quantity) {
 }
 
 export function updateProductQuantityInCart(productId, newQuantity) {
-  if (isNaN(newQuantity) || newQuantity <= 0) {
+  if (!Number.isInteger(newQuantity) || newQuantity <= 0) {
     console.error("Invalid quantity value.");
     return;
   }
@@ -65,10 +66,125 @@ export function updateProductQuantityInCart(productId, newQuantity) {
 
   if (product) {
     product.quantity = newQuantity;
-    saveToLocalStorage("cart", [...cart]);
+    saveToLocalStorage("cart", cart);
   }
 }
 
 export function getCart() {
   return getFromLocalStorage("cart") || [];
+}
+
+export function renderCartPage() {
+  const container = document.querySelector("#cart-section");
+  const cart = getCart();
+
+  container.innerHTML = cart.length
+    ? `${cart
+        .map((product) => createCartItemHTML(product, product.quantity))
+        .join("")}
+  <a id="checkout-btn" class="btn btn-success mt-3 w-100">
+    Proceder al Pago con Stripe
+  </a>`
+    : "<p>Tu carrito está vacío.</p>";
+
+  const checkoutButton = document.querySelector("#checkout-btn");
+
+  if (checkoutButton) {
+    checkoutButton.addEventListener("click", async () => {
+      const cart = getCart();
+
+      try {
+        const response = await fetch(
+          "http://localhost:5001/api/create-checkout-session",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ cart }),
+          }
+        );
+
+        const data = await response.json();
+
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          alert("Error redirecting to Stripe Checkout");
+        }
+      } catch (error) {
+        console.error("Checkout error:", error);
+      }
+    });
+  }
+  setTimeout(() => {
+    document.querySelectorAll(".remove-btn").forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const productId = e.target.closest("button").dataset.slug;
+        removeFromCart(productId);
+      });
+    });
+  }, 0);
+}
+
+export function removeFromCart(productId) {
+  let cart = getFromLocalStorage("cart") || [];
+  cart = cart.filter((item) => item.slug !== productId);
+  saveToLocalStorage("cart", cart);
+
+  // Оновлення сторінки кошика, якщо вона є
+  const cartSection = document.querySelector("#cart-section");
+  if (cartSection) {
+    renderCartPage();
+  }
+
+  updateCartCount();
+}
+
+export function updateCartCount() {
+  const cart = getCart();
+  const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  const cartCountElement = document.querySelector("#cart-count");
+  if (cartCountElement) {
+    cartCountElement.textContent = totalQuantity;
+  }
+}
+
+export function createCartItemHTML(
+  { slug, name, description, color, imageUrl, price },
+  quantity = 1
+) {
+  console.log(slug, name, description, color, imageUrl, price, quantity);
+
+  const totalPrice = (price * quantity).toFixed(2);
+
+  return `
+      <div class="d-flex gap-3">
+        <div style="width: 75px; height: 100px">
+          <img src="${
+            Array.isArray(imageUrl) ? imageUrl[0] : imageUrl
+          }" alt="${name}" class="w-100" />
+        </div>
+        <div class="w-100">
+          <div class="pl-1 d-flex justify-content-between align-items-center">
+            <h5 class="fs-6 fw-bold my-0">${name}</h5>
+            <button class="btn remove-btn" data-slug="${slug}">
+              <i class="bi bi-trash3 small"></i> Eliminar
+            </button>
+          </div>
+          <p class="my-0 fw-bold">${description}</p>
+          <p class="my-0 small">Color: ${color}</p>
+          <div class="d-flex justify-content-between small mt-2">
+            <p>Cantidad</p>
+            <span class="fw-bold">${quantity}</span>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="d-flex justify-content-between align-items-center">
+        <span>Total</span><span>${totalPrice}€</span>
+      </div>
+ 
+    `;
 }

@@ -107,7 +107,8 @@ input[type="checkbox"] {
     display: none;
     @include mixins.respond(tablet) {
       display: block;
-      width: 262px;
+      flex-basis: 175px;
+      flex-shrink: 0;
       height: 562px;
       overflow-y: scroll;
       width: 562px;
@@ -129,8 +130,10 @@ input[type="checkbox"] {
   .active--categories-list {
     font-weight: 600;
     color: black !important;
-
     border-bottom: 1px solid black;
+  }
+  .price-list label {
+    color: #807e7e;
   }
 }
 
@@ -148,7 +151,7 @@ input[type="checkbox"] {
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
   @include mixins.respond(tablet) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
   }
 }
