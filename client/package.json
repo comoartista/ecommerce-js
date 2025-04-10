@@ -1,7 +1,7 @@
 {
-  "name": "Espresso bar",
+  "name": "3legant",
   "version": "1.0.0",
-  "description": "App to track calories, meals, workouts",
+  "description": "Simplicity Shop - Online Store",
   "main": "app.js",
   "scripts": {
     "build": "webpack",
