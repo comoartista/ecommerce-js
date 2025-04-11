@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   mode: "development",
@@ -68,6 +69,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       title: "Webpack App",
       filename: "index.html",
@@ -97,7 +99,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         { from: "src/images", to: "images" },
-        { from: "src/data.json", to: "data.json" }, // Копіюємо data.json
+        { from: "src/data.json", to: "data.json" },
       ],
     }),
   ],

@@ -5,8 +5,8 @@ export async function fetchProducts() {
   if (productsList.length === 0) {
     try {
       const response = await fetch(
-        import.meta.env.PROD
-          ? "https://ecommerce-js-2rb5.onrender.com/api/products"
+        process.env.NODE_ENV === "production"
+          ? `${process.env.PROD_API_URL}/products`
           : "http://localhost:5001/api/products"
       );
 

@@ -4,7 +4,7 @@ import * as bootstrap from "bootstrap"; // Imports all Bootstrap components
 // Import Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 // Import custom styles
 import "./scss/style.scss";
@@ -24,6 +24,8 @@ import { renderCartPage, updateCartCount } from "./js/modules/cart.js";
 
 import headerHTML from "./components/header/header.html";
 import footerHTML from "./components/footer/footer.html";
+
+console.log("env:", import.meta.env);
 
 // Initialize the application
 export function init() {

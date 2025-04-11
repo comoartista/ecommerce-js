@@ -95,8 +95,8 @@ export function renderCartPage() {
 
       try {
         const response = await fetch(
-          import.meta.env.PROD
-            ? "https://ecommerce-js-2rb5.onrender.com/api/create-checkout-session"
+          process.env.NODE_ENV === "production"
+            ? `${process.env.PROD_API_URL}/create-checkout-session`
             : "http://localhost:5001/api/create-checkout-session",
           {
             method: "POST",
