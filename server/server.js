@@ -9,12 +9,13 @@ const connectDB = require("./config/db");
 connectDB();
 
 const app = express();
+const isProduction = process.env.NODE_ENV === "production";
+
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? "https://ecommerce-js-2rb5.onrender.com"
-        : "http://localhost:3000",
+    origin: isProduction
+      ? "https://ecommerce-js-2rb5.onrender.com"
+      : "http://localhost:3000",
   })
 );
 app.use(express.json());
