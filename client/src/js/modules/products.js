@@ -5,7 +5,9 @@ export async function fetchProducts() {
   if (productsList.length === 0) {
     try {
       const response = await fetch(
-        "https://ecommerce-js-2rb5.onrender.com/api/products"
+        import.meta.env.PROD
+          ? "https://ecommerce-js-2rb5.onrender.com/api/products"
+          : "http://localhost:5001/api/create-checkout-session"
       );
 
       if (!response.ok) {
