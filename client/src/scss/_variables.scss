@@ -1,16 +1,12 @@
 @use "mixins";
 
+// ────────────────
+// Fonts & Typography Setup
+// ────────────────
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&family=Unbounded&display=swap");
 
 $primary-font: "Open Sans", sans-serif;
 $secondary-font: "Unbounded", sans-serif;
-
-$claudy-color: #f5f4f3;
-$oyster-color: #dfdedb;
-$stormy-color: #323334;
-$opal-color: #384353;
-$color-bg-gray: #f3f5f7;
-$color-blue: #377dff;
 
 h1,
 h2,
@@ -21,6 +17,19 @@ h6 {
   font-family: $secondary-font;
 }
 
+// ────────────────
+// Color Variables
+// ────────────────
+$claudy-color: #f5f4f3;
+$oyster-color: #dfdedb;
+$stormy-color: #323334;
+$opal-color: #384353;
+$color-bg-gray: #f3f5f7;
+$color-blue: #377dff;
+
+// ────────────────
+// Heading Styles
+// ────────────────
 .heading-hero {
   font-size: 96px;
   letter-spacing: -2px;
@@ -78,6 +87,9 @@ h6 {
   }
 }
 
+// ────────────────
+// Button Styles
+// ────────────────
 .button {
   padding: 8px 36px;
   color: #000;
@@ -105,23 +117,6 @@ h6 {
   border-top: 1px solid $opal-color;
   border-bottom: 1px solid $opal-color;
 }
-.link-opacity {
-  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.link-opacity:hover {
-  opacity: 0.7;
-}
-
-.footer {
-  background-color: $opal-color;
-}
-.card__link {
-  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.card__link:hover {
-  opacity: 0.9;
-}
 
 .button-check {
   width: fit-content;
@@ -137,6 +132,25 @@ h6 {
     line-height: 28px;
   }
 }
+
+// ────────────────
+// Links & Effects
+// ────────────────
+.link-opacity {
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.link-opacity:hover {
+  opacity: 0.7;
+}
+
+.card__link {
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.card__link:hover {
+  opacity: 0.9;
+}
+
 .link--text {
   display: inline-block;
   border-bottom: 1px solid #000;
@@ -151,6 +165,9 @@ h6 {
   transform: translateX(5px);
 }
 
+// ────────────────
+// Sections & Layout
+// ────────────────
 .section {
   &__header {
     display: flex;
@@ -171,6 +188,9 @@ h6 {
   }
 }
 
+// ────────────────
+// Other
+// ────────────────
 .undertitle {
   color: $color-blue;
   font-weight: bold;

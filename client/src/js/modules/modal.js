@@ -1,5 +1,6 @@
 import { createCartItemHTML, getCart, removeFromCart } from "./cart.js";
 
+// Display the cart modal with current cart items
 export function displayModal() {
   const cart = getCart();
 
@@ -16,12 +17,15 @@ export function displayModal() {
     return;
   }
 
+  // Initialize Bootstrap modal
   const modal = new bootstrap.Modal(modalElement, { keyboard: false });
 
+  // Generate HTML for cart items
   const cartItemsHTML = cart
     .map((product) => createCartItemHTML(product, product.quantity))
     .join("");
 
+  // Inject modal content
   modalDialog.innerHTML = `
     <div class="modal-content px-2 h-100 border-0 rounded-0 shadow-sm">
       <div class="modal-header">
@@ -42,9 +46,9 @@ export function displayModal() {
 
   modal.show();
 
-  // 🟡 Event delegation for buttons inside modal
+  // Delegate events for dynamic content inside modal
   modalDialog.addEventListener("click", (e) => {
-    // Handle remove button
+    // Handle remove button inside cart
     const removeBtn = e.target.closest(".remove-btn");
     if (removeBtn) {
       const productId = removeBtn.dataset.slug;
@@ -58,26 +62,26 @@ export function displayModal() {
         return;
       }
 
-      // Re-render cart items inside modal
+      // Re-render updated cart list
       const updatedHTML = updatedCart
         .map((product) => createCartItemHTML(product, product.quantity))
         .join("");
 
       document.querySelector("#cart-items").innerHTML = updatedHTML;
 
-      // Update item count in the modal title
+      // Update count badge
       const countEl = document.querySelector("#cart-count-modal");
       if (countEl) countEl.textContent = updatedCart.length;
     }
 
-    // Handle redirect to cart page
+    // Redirect to full cart page
     if (e.target.id === "button-cart") {
       window.location.href = "cart.html";
     }
   });
 }
 
-// Renders empty cart message inside the modal
+// Renders a message when cart is empty
 function renderEmptyCartModal() {
   const modalDialog = document.querySelector(".modal-dialog");
   modalDialog.innerHTML = `

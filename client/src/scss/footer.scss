@@ -1,0 +1,23 @@
+@use "mixins";
+
+.footer {
+  &-divider {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 2px;
+      background-color: #6c7275;
+      @include mixins.respond(tablet) {
+        transform: translateY(-50%) rotate(90deg);
+        left: -30px;
+        top: 50%;
+        width: 24px;
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { fetchProducts } from "./products";
 import { displayModal } from "../modules/modal.js";
 import { getFromLocalStorage, saveToLocalStorage } from "./localStorage.js";
 
+// Add product to cart with specified quantity and show confirmation modal
 export async function addToCart(productId, quantity) {
   if (!Number.isInteger(quantity) || quantity <= 0) {
     console.error("Invalid quantity value.");
@@ -19,6 +20,7 @@ export async function addToCart(productId, quantity) {
       return;
     }
 
+    // Check if product already exists in cart
     const existingProduct = cart.find((item) => item.slug === productId);
 
     if (existingProduct) {
@@ -37,6 +39,7 @@ export async function addToCart(productId, quantity) {
 
     saveToLocalStorage("cart", cart);
 
+    // Show modal with product details
     displayModal(
       {
         name: product.name,
@@ -55,6 +58,7 @@ export async function addToCart(productId, quantity) {
   }
 }
 
+// Update quantity of specific product already in the cart
 export function updateProductQuantityInCart(productId, newQuantity) {
   if (!Number.isInteger(newQuantity) || newQuantity <= 0) {
     console.error("Invalid quantity value.");
@@ -70,10 +74,12 @@ export function updateProductQuantityInCart(productId, newQuantity) {
   }
 }
 
+// Return full cart from localStorage
 export function getCart() {
   return getFromLocalStorage("cart") || [];
 }
 
+// Render cart page: list of items + Stripe checkout button
 export function renderCartPage() {
   const container = document.querySelector("#cart-section");
   const cart = getCart();
@@ -95,6 +101,7 @@ export function renderCartPage() {
     ? "https://ecommerce-js-2rb5.onrender.com/api"
     : "http://localhost:5001/api";
 
+  // Handle Stripe checkout request
   checkoutButton.addEventListener("click", async () => {
     const cart = getCart();
 
@@ -119,6 +126,7 @@ export function renderCartPage() {
     }
   });
 
+  // Handle remove button clicks
   setTimeout(() => {
     document.querySelectorAll(".remove-btn").forEach((button) => {
       button.addEventListener("click", (e) => {
@@ -129,12 +137,13 @@ export function renderCartPage() {
   }, 0);
 }
 
+// Remove item from cart and update cart view + count
 export function removeFromCart(productId) {
   let cart = getFromLocalStorage("cart") || [];
   cart = cart.filter((item) => item.slug !== productId);
   saveToLocalStorage("cart", cart);
 
-  // Оновлення сторінки кошика, якщо вона є
+  // If on cart page, re-render cart
   const cartSection = document.querySelector("#cart-section");
   if (cartSection) {
     renderCartPage();
@@ -143,6 +152,7 @@ export function removeFromCart(productId) {
   updateCartCount();
 }
 
+// Update cart icon counter (total quantity of items)
 export function updateCartCount() {
   const cart = getCart();
   const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -153,12 +163,11 @@ export function updateCartCount() {
   }
 }
 
+// Generate cart item HTML markup for rendering
 export function createCartItemHTML(
   { slug, name, description, color, imageUrl, price },
   quantity = 1
 ) {
-  console.log(slug, name, description, color, imageUrl, price, quantity);
-
   const totalPrice = (price * quantity).toFixed(2);
 
   return `
@@ -187,6 +196,5 @@ export function createCartItemHTML(
       <div class="d-flex justify-content-between align-items-center">
         <span>Total</span><span>${totalPrice}€</span>
       </div>
- 
     `;
 }

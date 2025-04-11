@@ -19,7 +19,6 @@ export function getFromLocalStorage(key) {
   }
 
   try {
-    // Retrieve the stored JSON data
     const data = localStorage.getItem(key);
 
     // Parse and return the data, or return `null` if nothing is found

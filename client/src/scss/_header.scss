@@ -1,17 +1,22 @@
 @use "variables" as vars;
 @use "mixins";
 
+// ─────────────────────────────
+// Header Main Section
+// ─────────────────────────────
 .header-section {
   position: relative;
   z-index: 100;
   width: 100%;
   padding-bottom: 60px;
 
+  // ───── Navigation Bar ─────
   nav {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1.2em;
     color: #000;
     height: 60px;
     background: #fff;
@@ -23,10 +28,13 @@
     z-index: 0;
   }
 
-  .menu-open-btn {
+  // ───── Menu Buttons ─────
+  .menu-open-btn,
+  .menu-close-btn {
     cursor: pointer;
   }
 
+  // ───── Menu Overlay ─────
   .menu-overlay {
     position: fixed;
     z-index: 1000 !important;
@@ -40,10 +48,7 @@
     color: vars.$stormy-color;
   }
 
-  .menu-close-btn {
-    cursor: pointer;
-  }
-
+  // ───── Top Navigation Inside Overlay ─────
   .menu-nav {
     display: flex;
     justify-content: space-between;
@@ -51,6 +56,7 @@
     color: vars.$stormy-color;
   }
 
+  // ───── Menu Links Columns ─────
   .menu-cols {
     display: flex;
   }
@@ -79,6 +85,7 @@
     width: 100%;
   }
 
+  // ───── Footer Inside Menu ─────
   .menu-footer {
     display: flex;
     flex-direction: column;
@@ -103,6 +110,7 @@
     gap: 1em;
   }
 
+  // ───── Responsive Styles (≤ 900px) ─────
   @media (max-width: 900px) {
     .menu-overlay {
       height: 100vh;

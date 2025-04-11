@@ -1,6 +1,7 @@
 // Import Swiper
 import Swiper from "swiper";
 import * as bootstrap from "bootstrap"; // Imports all Bootstrap components
+
 // Import Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
