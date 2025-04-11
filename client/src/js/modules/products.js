@@ -9,8 +9,8 @@ export async function fetchProducts() {
         ? "https://ecommerce-js-2rb5.onrender.com/products"
         : "http://localhost:5001/api/products";
 
-      const result = await fetchWithRetry(API_URL);
-
+      const response = await fetch(API_URL);
+      const result = await response.json();
       productsList = result.data;
     } catch (error) {
       console.error("Failed to load products:", error.message);
