@@ -9,7 +9,14 @@ const connectDB = require("./config/db");
 connectDB();
 
 const app = express();
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "https://ecommerce-js-2rb5.onrender.com"
+        : "http://localhost:3000",
+  })
+);
 app.use(express.json());
 
 // Static Folder

@@ -25,7 +25,6 @@ import { renderCartPage, updateCartCount } from "./js/modules/cart.js";
 import headerHTML from "./components/header/header.html";
 import footerHTML from "./components/footer/footer.html";
 
-console.log("env:", import.meta.env);
 
 // Initialize the application
 export function init() {
