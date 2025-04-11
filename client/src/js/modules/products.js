@@ -6,7 +6,7 @@ export async function fetchProducts() {
   if (productsList.length === 0) {
     try {
       const API_URL = isProduction
-        ? "https://ecommerce-js-2rb5.onrender.com/products"
+        ? "https://ecommerce-js-2rb5.onrender.com/api/products"
         : "http://localhost:5001/api/products";
 
       const response = await fetch(API_URL);
