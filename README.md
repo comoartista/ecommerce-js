@@ -30,7 +30,7 @@ A simple e-commerce store built with vanilla JavaScript and Webpack. It includes
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/comoartista/ecommerce-js.git
+git clone https://github.com/comoartista/3legent-shop.git
 cd ecommerce-js
 ```
 
