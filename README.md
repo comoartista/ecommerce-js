@@ -5,12 +5,13 @@ A simple e-commerce store built with vanilla JavaScript and Webpack. It includes
 ---
 
 ## 🚀 Features
-
-- Display products from backend  
-- Add to cart and save items  
-- Stripe Checkout integration  
-- Responsive interface  
-- Separated frontend / backend structure
+-	Product data stored in a MongoDB database
+-	Products fetched via a REST API built with Express.js
+-	Dynamic product display on the frontend
+-	Add to cart and preserve items in session
+-	Secure payment flow with Stripe Checkout integration
+-	Fully responsive interface styled with SCSS
+-	Clean separation between frontend (vanilla JS + Webpack) and backend (Node.js + Express + MongoDB)
 
 ---
 
@@ -20,6 +21,7 @@ A simple e-commerce store built with vanilla JavaScript and Webpack. It includes
 - HTML, SCSS
 - Webpack
 - Node.js + Express
+- MongoDB 
 - Stripe API
 - Render (deployment)
 
