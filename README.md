@@ -1,6 +1,6 @@
 # 3legent-shop
 
-A simple e-commerce store built with vanilla JavaScript and Webpack. It includes a backend (Express) and Stripe Checkout integration for order processing.
+E-commerce store built with vanilla JavaScript and Webpack. It includes a backend (Express) and Stripe Checkout integration for order processing.
 
 ---
 
